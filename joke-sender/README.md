@@ -1,5 +1,5 @@
 # Joke Sender
-This application sends you an SMS containing a random joke very 2 hours (only on weekdays and during business hours). The jokes were pulled from [r/ProgrammerDadJokes](https://www.reddit.com/r/ProgrammerDadJokes/) and filtered down to the top 5,000 self-contained posts.
+This application sends you an SMS containing a random joke every 2 hours (only on weekdays and during business hours). The jokes were pulled from [r/ProgrammerDadJokes](https://www.reddit.com/r/ProgrammerDadJokes/) and filtered down to the top 5,000 self-contained posts.
 
 ## Setup
 1. Edit the `phoneNumber` [Application Global](https://app.losant.com/applications/~losant-application-jokeSender-0~/globals) with your phone number.
