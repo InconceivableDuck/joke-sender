@@ -1,0 +1,213 @@
+resourceType: Flow
+resources:
+  - description: ''
+    flowClass: cloud
+    globals: []
+    id: ~losant-flow-jokeSender-0~
+    name: Joke Sender
+    nodes:
+      - config:
+          message: ''
+          property: ''
+        id: QAYYG5Tgjv
+        meta:
+          category: output
+          description: ''
+          id: QAYYG5Tgjv
+          label: Debug
+          name: debug
+          x: 80
+          'y': 1060
+        outputIds: []
+        type: DebugNode
+      - config:
+          max: '{{length working.jokes.body}}'
+          min: 0
+          resultPath: working.randomIndex
+        id: FWyhVo_EPh
+        meta:
+          category: logic
+          description: ''
+          id: FWyhVo_EPh
+          label: Random Number
+          name: random-number
+          x: 80
+          'y': 580
+        outputIds:
+          - - 5Re41SXDq0
+        type: RandomNumberNode
+      - config:
+          rules:
+            - indexTemplate: '{{working.randomIndex}}'
+              outputPath: working.randomJoke
+              type: lookupAt
+          sourceArrayPath: working.jokes.body
+        id: 5Re41SXDq0
+        meta:
+          category: logic
+          description: ''
+          id: 5Re41SXDq0
+          label: Array
+          name: array
+          x: 80
+          'y': 680
+        outputIds:
+          - - Qc5lGECxDo
+        type: ArrayNode
+      - config:
+          bodyTemplate: |-
+            {{{working.randomJoke.title}}}
+            {{#gt (length working.randomJoke.text) 0}}
+
+            {{{working.randomJoke.text}}}
+            {{/gt}}
+          phoneNumberTemplate: '{{globals.phoneNumber}}'
+          resultPath: ''
+        id: Qc5lGECxDo
+        meta:
+          category: output
+          description: ''
+          id: Qc5lGECxDo
+          label: SMS
+          name: structure-sms
+          x: 80
+          'y': 840
+        outputIds:
+          - - QAYYG5Tgjv
+        type: StructureSmsNode
+      - config:
+          branchPath: ''
+          days:
+            - false
+            - true
+            - true
+            - true
+            - true
+            - true
+            - false
+          daysPath: ''
+          daysType: array
+          endTimeTemplate: '18:00'
+          sourcePath: ''
+          startTimeTemplate: '10:00'
+          timeZoneTemplate: America/New_York
+        id: JMq8n7hflG
+        meta:
+          category: logic
+          description: ''
+          id: JMq8n7hflG
+          label: Time Range
+          name: time-range
+          timeZoneTemplateType: selector
+          x: 80
+          'y': 300
+        outputIds:
+          - []
+          - - WjjJUj3UR1
+        type: TimeRangeNode
+      - config:
+          authCredentials: {}
+          authType: none
+          caCertTemplate: ''
+          disableSSLVerification: false
+          encodingTemplate: utf8
+          errorBehavior: throw
+          errorPath: ''
+          headerInfo: []
+          method: GET
+          requestEncodingTemplate: utf8
+          responsePath: working.jokes
+          timeoutTemplate: ''
+          uriTemplate: >-
+            https://files.onlosant.com/~losant-application-jokeSender-0~/jokes.json
+        id: WjjJUj3UR1
+        meta:
+          category: data
+          description: ''
+          id: FXV2O_8bpG
+          label: Get Jokes
+          name: http
+          x: 80
+          'y': 480
+        outputIds:
+          - - FWyhVo_EPh
+        type: HttpNode
+      - config: {}
+        id: tlOuGFpWfe
+        meta:
+          annotationText: Only want jokes 10a - 6p on weekdays.
+          category: annotation
+          height: 100
+          label: Note
+          name: note
+          width: 260
+          x: 280
+          'y': 300
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: 4PP8rui5OX
+        meta:
+          annotationText: Get all the jokes from Files and select a random entry.
+          category: annotation
+          height: 100
+          label: Note
+          name: note
+          width: 260
+          x: 280
+          'y': 480
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: yZK4jPHiFB
+        meta:
+          annotationText: >-
+            Send to the phone number in globals. Not every joke has a punch
+            line, so the template only adds a blank line if a punchline exists.
+
+
+            The joke content is in triple-curly braces so it does not attempt to
+            HTML escape the output.
+          category: annotation
+          height: 220
+          label: Note
+          name: note
+          width: 260
+          x: 280
+          'y': 840
+        outputIds: []
+        type: AnnotationNode
+    triggers:
+      - config: {}
+        key: ~losant-flow-jokeSender-0~-H9yYMCGimciNW8mX5Zpu0
+        meta:
+          category: trigger
+          description: ''
+          deviceId: null
+          id: joVzhaJdUS
+          label: Virtual Button
+          name: virtualButton
+          payload: ''
+          uiId: joVzhaJdUS
+          x: 300
+          'y': 60
+        outputIds:
+          - - JMq8n7hflG
+        type: virtualButton
+      - config:
+          seconds: 7200
+        key: ~losant-flow-jokeSender-0~-NfKfipdn11XPwlKCkLq4I
+        meta:
+          category: trigger
+          description: ''
+          id: P7l7NqsHKP
+          label: Timer
+          name: timer
+          timerTypeSelect: seconds
+          uiId: P7l7NqsHKP
+          x: 80
+          'y': 60
+        outputIds:
+          - - JMq8n7hflG
+        type: timer
+version: 1

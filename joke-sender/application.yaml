@@ -1,0 +1,15 @@
+resourceType: Application
+resources:
+  - description: >-
+      Sends a random joke from 5,000 self-contained jokes pulled from
+      [r/ProgrammerDadJokes](https://www.reddit.com/r/ProgrammerDadJokes/).
+    filesPath: ./files
+    globals:
+      - cloudOnly: true
+        description: ''
+        json: '"+5135551212"'
+        key: phoneNumber
+    id: ~losant-application-jokeSender-0~
+    name: Joke Sender
+    readmePath: ./README.md
+version: 1

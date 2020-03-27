@@ -1,0 +1,6 @@
+resourceType: ExperienceVersion
+resources:
+  - endpointDefaultCors: true
+    id: ~losant-experienceVersion-develop-0~
+    version: develop
+version: 1
