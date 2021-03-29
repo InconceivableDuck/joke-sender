@@ -14,7 +14,7 @@ The script skips posts that are not "self-contained", which means the post text 
 You can find the resulting `jokes.json` file in this repo at `/joke-sender/files/jokes.json`.
 
 ## Sending the Jokes
-The `joke-sender` folder in this repo is a [Losant Application Template](https://docs.losant.com/templates/overview/). This template contains the workflow that pulls a random joke from `jokes.json` and sends it via SMS.
+The `joke-sender` folder in this repo is a [Application Template](https://docs.losant.com/templates/overview/) for the [Losant IoT Platform](https://www.losant.com). This template contains the workflow that pulls a random joke from `jokes.json` and sends it via SMS.
 
 If you want to use this template yourself:
 1. Zip the `jokes-sender` folder.
